@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soccer Field Exploration</title>
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+
+<body>
+    <div class="container mt-5">
+        <h1>Recreational activities in WWU campus</h1>
+        <p>This website show information based on your current location, please click the button below and discover the hided information.</p>
+        <!-- Button to check geolocation -->
+        <button id="checkLocationBtn" class="btn btn-primary">Check my location</button>
+        <!-- Loading spinner -->
+        <div id="loadingSpinner" class="spinner-border text-primary" role="status" style="display: none;">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <!-- Content to display if inside soccer field -->
+        <div id="content" class="mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="Weightlifting.jpg" class="img-fluid" alt="Weightlifting at REC Center ">
+                    <p>Enjoy a good workout at rec center. all you need is your Student ID to get into the facility</p>
+                </div>
+                <div class="col-md-4">
+                    <img src="Swim.jpg" class="img-fluid" alt="Swimming at REC Center">
+                    <p>Enjoy free swimming classes every thursday at 4</p>
+                </div>
+                <div class="col-md-4">
+                    <img src="Flag.jpg" class="img-fluid" alt="Flag Football">
+                    <p>Join us every afternoon to play some Flag Football at the Field by the Rec Center</p>
+                </div>
+            </div>
+        </div>
+        <!-- Message to display if outside soccer field -->
+        <div id="errorMessage" class="mt-3 alert alert-danger" style="display: none;">
+            Try again, you are not near to WWU campus.
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Function to show loading spinner
+        function showLoading() {
+            document.getElementById("loadingSpinner").style.display = "block";
+        }
+
+        // Function to hide loading spinner
+        function hideLoading() {
+            document.getElementById("loadingSpinner").style.display = "none";
+        }
+
+        // Function to check if the user's geolocation is inside the soccer field
+        function checkLocation() {
+            showLoading(); // Show loading spinner
+
+            navigator.geolocation.getCurrentPosition(function(position) {
+                // Check if the user's coordinates are within the soccer field area
+                // Replace these coordinates with your soccer field coordinates
+
+                const soccerFieldLatitude = 48.7371070;
+                const soccerFieldLongitude = -122.4613309;
+                // Define a radius for the soccer field area (in degrees)
+                const radius = 0.01;
+
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                if (Math.abs(latitude - soccerFieldLatitude) < radius && Math.abs(longitude - soccerFieldLongitude) < radius) {
+                    // User is inside the soccer field, show content
+                    document.getElementById("content").style.display = "block";
+                    document.getElementById("errorMessage").style.display = "none";
+                } else {
+                    // User is outside the soccer field, show error message
+                    document.getElementById("errorMessage").style.display = "block";
+                    document.getElementById("content").style.display = "none";
+                }
+                hideLoading(); // Hide loading spinner
+            }, function(error) {
+                // Error handling if geolocation fails
+                console.error("Error getting geolocation:", error);
+                alert("Error getting geolocation. Please try again later.");
+                hideLoading(); // Hide loading spinner
+            });
+        }
+        // Attach event listener to the button
+        document.getElementById("checkLocationBtn").addEventListener("click", checkLocation);
+    </script>
+    
+</body>
+</html>
