@@ -1,10 +1,5 @@
-#content {
-    display: none;
-}
 /* CSS to center text and button and add color */
-body {
-    text-align: center; /* Center align text */
-}
+
 
 .btn-primary {
     background-color: #007bff; /* Blue color for the button */
@@ -14,4 +9,20 @@ body {
 .container {
     max-width: 600px; /* Limit container width */
     margin: 0 auto; /* Center align container */
+    text-align: center; /* Center align text */
+}
+
+footer {
+    position: fixed; /* Fixed position */
+    left: 0; /* Align to the left */
+    bottom: 0; /* Align to the bottom */
+    width: 100%; /* Take the full width of the viewport */
+    background-color: rgb(40, 103, 175);
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+#content {
+    display: none;
 }
