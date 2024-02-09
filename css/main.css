@@ -1,3 +1,17 @@
 #content {
     display: none;
 }
+/* CSS to center text and button and add color */
+body {
+    text-align: center; /* Center align text */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Blue color for the button */
+    color: #fff; /* White text color */
+}
+
+.container {
+    max-width: 600px; /* Limit container width */
+    margin: 0 auto; /* Center align container */
+}
